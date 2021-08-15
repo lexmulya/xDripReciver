@@ -7,7 +7,7 @@ export class DataController {
   constructor(private readonly dataService: DataService) {
   }
 
-  @Get(':did')
+  @Get(':did/json.get')
   @Header('content-type', 'text/plain')
   async getData(@Query() query, @Param('did') idTransmitter: string/*, @Res() res: Response*/){
     console.log("get data = ", JSON.stringify(query));
