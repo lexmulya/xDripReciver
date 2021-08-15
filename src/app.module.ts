@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {ConfigModule} from "@nestjs/config";
 import { ReceiverModule } from './reciver/receiver.module';
+import { DataModule } from './data/data.module';
 import * as ormconfig from './ormconfig';
 
 @Module({
@@ -13,6 +14,7 @@ import * as ormconfig from './ormconfig';
     }),
     TypeOrmModule.forRoot(ormconfig),
     ReceiverModule,
+    DataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
