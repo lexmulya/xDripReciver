@@ -1,6 +1,7 @@
 import { Controller, Get, Header, HttpStatus, Param, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { DataService } from './data.service';
+import { DataQueryParams } from '../QueryParams/Data.qp';
 
 @Controller('data')
 export class DataController {
@@ -12,10 +13,15 @@ export class DataController {
   async getData(@Query() query, @Param('did') idTransmitter: string/*, @Res() res: Response*/){
     console.log("get data = ", JSON.stringify(query));
 
-    const ret = await this.dataService.getData(idTransmitter);
-    //const retStr= new  String(JSON.stringify(ret));
-    //return retStr;
-    return ret;
-    //res.status(200).send(retStr);
+    const reqParam = DataQueryParams.parseReq(query);
+
+    const retItems = await this.dataService.getData(idTransmitter, reqParam);
+
+    let retStr = "";
+    for(const retItem of retItems){
+      retStr += retItem;
+    }
+    return retStr;
+
   }
 }

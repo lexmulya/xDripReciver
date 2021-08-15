@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Data } from '../Entity/Data.entity';
 import { Repository } from 'typeorm';
 import { DataToPhoneDto } from '../DTO/DataToPhone.dto';
+import { DataQueryParams } from '../QueryParams/Data.qp';
 
 @Injectable()
 export class DataService {
@@ -14,24 +15,29 @@ export class DataService {
               private dataRepository: Repository<Data>) {
   }
 
-  public async getData(idTransmitter:string): Promise<DataToPhoneDto> {
+  public async getData(idTransmitter:string, reqParams: DataQueryParams): Promise<DataToPhoneDto[]> {
     try {
       const txIdFromString = this.getTxId(idTransmitter);
-      const lastDataDB = await this.dataRepository.findOne({
+      const lastDataDB = await this.dataRepository.find({
         where:{
           idTransmitter: txIdFromString
         },
         order:{
           id: 'DESC'
-        }
+        },
+        take: reqParams.limit
       })
+      const ret = [];
       if(lastDataDB){
-        const ret = DataToPhoneDto.formatFromDB(lastDataDB);
+        let itemDB;
+        for(itemDB of lastDataDB){
+          const item = DataToPhoneDto.formatFromDB(itemDB);
+          ret.push(item);
+        }
+        //const ret = DataToPhoneDto.formatFromDB(lastDataDB);
         return ret;
-      }else {
-        return new DataToPhoneDto();
       }
-
+      return ret;
     } catch (e) {
       console.log('getData e = ', e);
       throw new HttpException("", HttpStatus.NOT_FOUND);
