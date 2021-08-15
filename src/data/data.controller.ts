@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Param, Query, Res } from '@nestjs/common';
+import { Controller, Get, Header, HttpStatus, Param, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { DataService } from './data.service';
 
@@ -8,10 +8,13 @@ export class DataController {
   }
 
   @Get(':did')
+  @Header('content-type', 'text/plain')
   async getData(@Query() query, @Param('did') idTransmitter: string/*, @Res() res: Response*/){
     console.log("get data = ", JSON.stringify(query));
 
     const ret = await this.dataService.getData(idTransmitter);
-    return JSON.stringify(ret);
+    const retStr= new  String(JSON.stringify(ret));
+    return retStr;
+    //res.status(200).send(retStr);
   }
 }
