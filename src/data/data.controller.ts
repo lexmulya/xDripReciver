@@ -19,7 +19,7 @@ export class DataController {
 
     let retStr = "";
     for(const retItem of retItems){
-      retStr += retItem;
+      retStr += retItem.toString();
     }
     return retStr;
 
