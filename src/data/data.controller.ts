@@ -19,7 +19,7 @@ export class DataController {
 
     let retStr = "";
     for(const retItem of retItems){
-      retStr += retItem.toString();
+      retStr += JSON.stringify(retItem);
     }
     return retStr;
 
