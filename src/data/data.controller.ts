@@ -5,8 +5,8 @@ import { Response } from 'express';
 export class DataController {
 
   @Get('')
-  async dataRecive(@Query() query, @Res() res: Response){
-    console.log("receiver data = ", JSON.stringify(query));
+  async getData(@Query() query, @Res() res: Response){
+    console.log("get data = ", JSON.stringify(query));
 
     res.status(HttpStatus.OK).send();
   }
