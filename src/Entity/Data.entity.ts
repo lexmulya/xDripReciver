@@ -4,7 +4,7 @@ import { BaseEntity } from './Base.entity';
 @Entity()
 export class Data extends BaseEntity {
   @Column()
-  idTransmitter: string; //zi
+  idTransmitter: number; //zi
 
   @Column()
   wixelClockMS: number; //rr = current ms clock of wixel
@@ -29,4 +29,10 @@ export class Data extends BaseEntity {
 
   @Column()
   location: string; //gl = geo location longitude/latitude
+
+  @Column()
+  udpPort: number; //pc
+
+  @Column()
+  batteryLife: number; //pc
 }
