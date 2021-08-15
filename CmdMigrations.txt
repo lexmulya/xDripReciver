@@ -1,0 +1,2 @@
+npm run typeorm:migrate AddPrimaryColumn  == create migration
+npm run typeorm:run	== apply migration
