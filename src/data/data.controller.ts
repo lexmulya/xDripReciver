@@ -13,8 +13,9 @@ export class DataController {
     console.log("get data = ", JSON.stringify(query));
 
     const ret = await this.dataService.getData(idTransmitter);
-    const retStr= new  String(JSON.stringify(ret));
-    return retStr;
+    //const retStr= new  String(JSON.stringify(ret));
+    //return retStr;
+    return ret;
     //res.status(200).send(retStr);
   }
 }
