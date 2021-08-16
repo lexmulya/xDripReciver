@@ -14,12 +14,12 @@ export class DataController {
     console.log("get data = ", JSON.stringify(query));
 
     const reqParam = DataQueryParams.parseReq(query);
-    reqParam.limit = 1; //test
+    //reqParam.limit = 1; //test
     const retItems = await this.dataService.getData(idTransmitter, reqParam);
 
     let retStr = "";
     for(const retItem of retItems){
-      retStr += JSON.stringify(retItem);
+      retStr += JSON.stringify(retItem)+'\n';
     }
     return retStr;
 
