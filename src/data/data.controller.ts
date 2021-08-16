@@ -14,7 +14,7 @@ export class DataController {
     console.log("get data = ", JSON.stringify(query));
 
     const reqParam = DataQueryParams.parseReq(query);
-
+    reqParam.limit = 1; //test
     const retItems = await this.dataService.getData(idTransmitter, reqParam);
 
     let retStr = "";
